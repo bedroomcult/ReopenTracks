@@ -9,6 +9,8 @@ _ReopenTracks_ is a sport tracking application that completely respects your pri
 
 Get the app from [GitHub Releases](https://github.com/bedroomcult/ReopenTracks/releases) — download the APK and install it directly.
 
+Building, signing, or releasing? See **[docs/](docs/README.md)** — [BUILD_AND_RELEASE.md](docs/BUILD_AND_RELEASE.md) and [VERSIONING.md](docs/VERSIONING.md).
+
 Translations are hosted on <a href="https://hosted.weblate.org/engage/opentracks/">
 hosted.weblate.org</a>.
 <a href="https://hosted.weblate.org/engage/opentracks/">
