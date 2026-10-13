@@ -1,44 +1,13 @@
-# <img src="drawable-svg/LOGO.svg" alt="OpenTracks logo" height="40"></img> OpenTracks: a sport tracker
+# <img src="drawable-svg/LOGO.svg" alt="ReopenTracks logo" height="40"></img> ReopenTracks: a sport tracker
 
-_OpenTracks_ is a sport tracking application that completely respects your privacy.
+_ReopenTracks_ is a sport tracking application that completely respects your privacy.
 
 [![Awesome Humane Tech](https://codeberg.org/teaserbot-labs/delightful-humane-design/raw/branch/main/humane-tech-badge.svg)](https://delightful.club/delightful-humane-design/#health)
 
-<table>
-    <tr>
-        <th>Free (F-Droid)</th>
-        <th>Free (Nightly for F-Droid)</th>
-        <th>Donations</th>
-    </tr>
-    <tr>
-        <td align="center">
-            <a href="https://f-droid.org/packages/de.dennisguse.opentracks.playstore">
-                <img alt="Get it on F-Droid" src="https://fdroid.gitlab.io/artwork/badge/get-it-on.png" height="60" align="middle">
-            </a>
-        </td>
-        <td align="center">
-            <a href="https://fdroid.storchp.de/fdroid/repo?fingerprint=99985A7E73DCB0B16C9BDDCE7A0B4996F88068AE7C771ED53E217E69CD1FF196">
-                <img alt="Nightly builds (for F-Droid client)" src="https://opentracksapp.com/static/img/fdroid.storchp.de.png" height="90" align="middle">
-            </a>
-        </td>
-        <td align="center">
-            <a href="https://liberapay.com/OpenTracks/donate">
-                <img alt="Donate using Liberapay" src="https://liberapay.com/assets/widgets/donate.svg" height="45" align="middle">
-            </a>
-        </td>
-    </tr>
-    <tr>
-        <td align="center">
-            <img alt="OpenTracks version published on F-Droid" src="https://img.shields.io/f-droid/v/de.dennisguse.opentracks.playstore.svg" align="middle" >
-        </td>
-        <td></td>
-        <td align="center">
-            <a href="https://play.google.com/store/apps/details?id=de.dennisguse.opentracks.playstore">
-                <img alt="Get it on Google Play" src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" height="60" align="middle">
-            </a>
-        </td>
-    </tr>
-</table>
+[![GitHub release](https://img.shields.io/github/v/release/bedroomcult/ReopenTracks)](https://github.com/bedroomcult/ReopenTracks/releases)
+[![GitHub stars](https://img.shields.io/github/stars/bedroomcult/ReopenTracks?style=social)](https://github.com/bedroomcult/ReopenTracks)
+
+Get the app from [GitHub Releases](https://github.com/bedroomcult/ReopenTracks/releases) — download the APK and install it directly.
 
 Translations are hosted on <a href="https://hosted.weblate.org/engage/opentracks/">
 hosted.weblate.org</a>.
@@ -84,7 +53,7 @@ hosted.weblate.org</a>.
 
 ### Gadgetbridge integration
 
-OpenTracks can be used with [Gadgetbridge](https://www.gadgetbridge.org/):
+ReopenTracks can be used with [Gadgetbridge](https://www.gadgetbridge.org/):
 * shows statistics via notification on smart watches (requires Gadgetbridge 0.56.1 or later), and
 * Gadgetbridge's GPX exporter generates `opentracks:trackid` to avoid duplication (Gadgetbridge 0.53.0 or later).
 
@@ -100,26 +69,26 @@ __Only required permissions:__
 
 ### Public API
 
-OpenTracks includes an API for starting/stopping recording by another installed application (e.g., [Automate](https://llamalab.com/automate/), [Tasker](https://tasker.joaoapps.com), or [Easer](https://github.com/renyuneyun/Easer)). 
+ReopenTracks includes an API for starting/stopping recording by another installed application (e.g., [Automate](https://llamalab.com/automate/), [Tasker](https://tasker.joaoapps.com), or [Easer](https://github.com/renyuneyun/Easer)). 
 The API is disabled by default to protect the user's privacy, but it can easily be enabled in the settings. Once enabled, the API can be invoked by sending an explicit Intent to start an activity.
 
 `Package`  (depends on the variant installed):
-* F-Droid: `de.dennisguse.opentracks`
-* GooglePlay: `de.dennisguse.opentracks.playStore`
-* Debug: `de.dennisguse.opentracks.debug`
-* Nightly: `de.dennisguse.opentracks.nightly`
+* F-Droid: `com.reopentracks`
+* GooglePlay: `com.reopentracks.playstore`
+* Debug: `com.reopentracks.debug`
+* Nightly: `com.reopentracks.nightly`
 
 `Classes`:
-* **Start a recording:**  `de.dennisguse.opentracks.publicapi.StartRecording`
+* **Start a recording:**  `com.reopentracks.publicapi.StartRecording`
     * Set track data: `TRACK_NAME`, `TRACK_DESCRIPTION`, `TRACK_CATEGORY`, and `TRACK_ICON` (
       non-localized identifier
-      see [/src/main/java/de/dennisguse/opentracks/util/TrackIconUtils.java#L38](/src/main/java/de/dennisguse/opentracks/util/TrackIconUtils.java#L38)).
+      see [/src/main/java/com/reopentracks/util/TrackIconUtils.java#L38](/src/main/java/com/reopentracks/util/TrackIconUtils.java#L38)).
       NOTE: if `TRACK_ICON` is not present, `TRACK_CATEGORY` will be used to determine the icon (
       localized).
     * Send recorded data to another application via _Dashboard API_: `STATS_TARGET_PACKAGE` and
       `STATS_TARGET_CLASS`
-* **Stop a recording:**  `de.dennisguse.opentracks.publicapi.StopRecording`
-* **Create a marker:**  `de.dennisguse.opentracks.publicapi.CreateMarker`
+* **Stop a recording:**  `com.reopentracks.publicapi.StopRecording`
+* **Create a marker:**  `com.reopentracks.publicapi.CreateMarker`
 
 For testing the API using adb, the general command syntax is:
 
@@ -130,7 +99,7 @@ adb shell am start -e someParameter someValue -n "package/class"
 Depending on the package and class, a complete command could look something like this:
 
 ```shell
-adb shell am start -n "de.dennisguse.opentracks.playstore/de.dennisguse.opentracks.publicapi.StartRecording"
+adb shell am start -n "com.reopentracks.playstore/com.reopentracks.publicapi.StartRecording"
 ```
 
 ## File formats compatibility with open-source software
@@ -148,7 +117,7 @@ adb shell am start -n "de.dennisguse.opentracks.playstore/de.dennisguse.opentrac
 
 ## Dashboard API (incl. map)
 
-As of v3.3.1, OpenTracks supports custom dashboards for displaying previously recorded and live
+As of v3.3.1, ReopenTracks supports custom dashboards for displaying previously recorded and live
 tracks.
 
 The reference implementation is [OSMDashboard](https://codeberg.org/OpenTracksApp/OSMDashboard), which
@@ -164,8 +133,8 @@ The developer documentation is in [README_API.md](README_API.md).
 
 ## Backup
 
-OpenTracks stores the data in the app-internal space:
-`/data/data/de.dennisguse.opentracks[|.playstore]`
+ReopenTracks stores the data in the app-internal space:
+`/data/data/com.reopentracks[|.playstore]`
 
 There is a SQLite database `database.db` that contains the tracks as well as the markers.
 Pictures attached to markers are stored as separate files.
@@ -173,7 +142,7 @@ Pictures attached to markers are stored as separate files.
 For backup and recovery, the best approach is to export as one KMZ file.
 This will contain all the tracks, pictures and the data as similar as possible as stored internally.
 In difference to backing up the database directly, a KMZ allows to be imported into a different (
-e.g., newer) version of OpenTracks.
+e.g., newer) version of ReopenTracks.
 
 ## Project history
 

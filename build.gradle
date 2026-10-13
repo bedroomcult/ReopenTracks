@@ -45,7 +45,7 @@ android {
     }
 
     defaultConfig {
-        applicationId 'de.dennisguse.opentracks'
+        applicationId 'com.reopentracks'
         versionCode 6284
         versionName "v4.22.0"
 
@@ -54,7 +54,7 @@ android {
         minSdk = 26
         targetSdk = 36
 
-        testInstrumentationRunner 'de.dennisguse.opentracks.TestRunner'
+        testInstrumentationRunner 'com.reopentracks.TestRunner'
         testInstrumentationRunnerArguments clearPackageData: 'true'
     }
     signingConfigs {
@@ -76,7 +76,7 @@ android {
         }
     }
 
-    namespace = 'de.dennisguse.opentracks'
+    namespace = 'com.reopentracks'
 
     buildTypes {
         debug {
@@ -94,21 +94,21 @@ android {
     productFlavors {
         nightly {
             dimension 'version'
-            applicationId 'de.dennisguse.opentracks.nightly'
+            applicationId 'com.reopentracks.nightly'
             signingConfig = signingConfigs.nightly
         }
         irreproducible {
-            // Non-reproducible: https://f-droid.org/de/packages/de.dennisguse.opentracks/
+            // Non-reproducible: https://f-droid.org/de/packages/com.reopentracks/
             dimension 'version'
-            applicationId 'de.dennisguse.opentracks'
+            applicationId 'com.reopentracks'
             versionNameSuffix 'irreproducible'
         }
         reproducible {
-            // Developer Binaries: https://github.com/OpenTracksApp/OSMDashboard/releases/download/v%v/de.dennisguse.opentracks.playstore_%v.apk
-            // FDroid: https://f-droid.org/de/packages/de.dennisguse.opentracks.playstore
-            // PlayStore: https://play.google.com/store/apps/details?id=de.dennisguse.opentracks.playstore
+            // Developer Binaries: https://github.com/OpenTracksApp/OSMDashboard/releases/download/v%v/com.reopentracks.playstore_%v.apk
+            // FDroid: https://f-droid.org/de/packages/com.reopentracks.playstore
+            // PlayStore: https://play.google.com/store/apps/details?id=com.reopentracks.playstore
             dimension 'version'
-            applicationId 'de.dennisguse.opentracks.playstore'
+            applicationId 'com.reopentracks.playstore'
             signingConfig = signingConfigs.release
         }
     }
