@@ -1,0 +1,85 @@
+# CI: build + lint on GitHub runners (no local runs, no emulator).
+# Default branch is `main`; if yours differs, change `branches: [main]` below (one line).
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout (full history + tags)
+        uses: actions/checkout@v4
+        with:
+          # build.gradle computes versionName via `git describe --tags`
+          # and versionCode via `git rev-list --count`; shallow checkout breaks both.
+          fetch-depth: 0
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v4
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v3
+      - name: Install API 36 platform + build-tools
+        # No-op if the runner image already includes them (matches compileSdk = 36).
+        run: sdkmanager "platforms;android-36" "build-tools;36.0.0"
+      - name: Make gradlew executable
+        run: chmod +x gradlew
+      - name: Assemble + compile androidTest
+        # Second target compile-checks the androidTest sources without executing them (no emulator in CI).
+        run: ./gradlew assembleIrreproducibleDebug assembleIrreproducibleDebugAndroidTest --stacktrace
+      - name: Upload debug APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: debug-apk
+          # Single-module build at repo root (no settings.gradle / app/ module).
+          path: build/outputs/apk/irreproducible/debug/*.apk
+          retention-days: 7
+
+  lint:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout (full history + tags)
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v4
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v3
+      - name: Install API 36 platform + build-tools
+        run: sdkmanager "platforms;android-36" "build-tools;36.0.0"
+      - name: Make gradlew executable
+        run: chmod +x gradlew
+      - name: Run Android Lint
+        # Fails on error-severity issues per lint.xml.
+        run: ./gradlew lintIrreproducibleDebug --stacktrace
+      - name: Upload lint report (on failure)
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: lint-report
+          path: build/reports/lint-results*
+          retention-days: 7
+          if-no-files-found: warn

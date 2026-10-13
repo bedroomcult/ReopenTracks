@@ -8,7 +8,7 @@
         <Preference
             android:title="@string/menu_import_all">
             <intent
-                android:targetClass="de.dennisguse.opentracks.io.file.importer.DirectoryChooserActivity$ImportDirectoryChooserActivity"
+                android:targetClass="com.reopentracks.io.file.importer.DirectoryChooserActivity$ImportDirectoryChooserActivity"
                 android:targetPackage="@string/applicationId" />
         </Preference>
         <SwitchPreferenceCompat
@@ -21,20 +21,20 @@
         <Preference
             android:title="@string/menu_export_all">
             <intent
-                android:targetClass="de.dennisguse.opentracks.io.file.importer.DirectoryChooserActivity$ExportDirectoryChooserActivity"
+                android:targetClass="com.reopentracks.io.file.importer.DirectoryChooserActivity$ExportDirectoryChooserActivity"
                 android:targetPackage="@string/applicationId" />
         </Preference>
         <Preference
             android:title="@string/menu_export_all_one_file">
             <intent
-                android:targetClass="de.dennisguse.opentracks.io.file.importer.DirectoryChooserActivity$ExportDirectoryChooserOneFileActivity"
+                android:targetClass="com.reopentracks.io.file.importer.DirectoryChooserActivity$ExportDirectoryChooserOneFileActivity"
                 android:targetPackage="@string/applicationId" />
         </Preference>
         <Preference
             android:key="@string/settings_default_export_directory_key"
             android:title="@string/settings_default_export_uri_title">
             <intent
-                android:targetClass="de.dennisguse.opentracks.io.file.importer.DirectoryChooserActivity$DefaultTrackExportDirectoryChooserActivity"
+                android:targetClass="com.reopentracks.io.file.importer.DirectoryChooserActivity$DefaultTrackExportDirectoryChooserActivity"
                 android:targetPackage="@string/applicationId" />
         </Preference>
         <SwitchPreferenceCompat

@@ -1,4 +1,4 @@
-# OpenTracks: Developer information
+# ReopenTracks: Developer information
 
 ## Craft new releases
 
@@ -11,8 +11,8 @@
 6. ... wait until reproducibility is verified by F-Droid
 
 Two releases will be created:
-* Application id: `de.dennisguse.opentracks` (irreproducible)
-* Application id: `de.dennisguse.opentracks.playstore` (reproducible)
+* Application id: `com.reopentracks` (irreproducible)
+* Application id: `com.reopentracks.playstore` (reproducible)
 
 For F-Droid the build status can be found [here](https://monitor.f-droid.org/builds/build).
 
@@ -25,7 +25,7 @@ Technical requirements:
 
 ## Translations (localization)
 
-Translations of the OpenTracks are handled in
+Translations of ReopenTracks are handled in
 Weblate: [https://hosted.weblate.org/projects/opentracks/](https://hosted.weblate.org/projects/opentracks).
 
 ## Google Play Store

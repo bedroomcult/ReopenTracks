@@ -19,7 +19,7 @@
     </PreferenceCategory>
 
     <PreferenceCategory android:title="@string/settings_generic_sensor">
-        <de.dennisguse.opentracks.settings.bluetooth.BluetoothLeHeartRatePreference
+        <com.reopentracks.settings.bluetooth.BluetoothLeHeartRatePreference
             android:defaultValue="@string/sensor_type_value_none"
             android:key="@string/settings_sensor_bluetooth_heart_rate_key"
             android:title="@string/sensor_state_heart_rate" />
@@ -29,22 +29,22 @@
             android:key="@string/settings_sensor_heart_rate_max_key"
             android:title="@string/settings_sensor_heart_rate_max"
             app:useSimpleSummaryProvider="true" />
-        <de.dennisguse.opentracks.settings.bluetooth.BluetoothLePressurePreference
+        <com.reopentracks.settings.bluetooth.BluetoothLePressurePreference
             android:defaultValue="@string/sensor_type_value_none"
             android:key="@string/settings_sensor_bluetooth_pressure_key"
             android:title="@string/sensor_state_pressure" />
     </PreferenceCategory>
 
     <PreferenceCategory android:title="@string/settings_cycling_sensor">
-        <de.dennisguse.opentracks.settings.bluetooth.BluetoothLeCyclingCadencePreference
+        <com.reopentracks.settings.bluetooth.BluetoothLeCyclingCadencePreference
             android:defaultValue="@string/sensor_type_value_none"
             android:key="@string/settings_sensor_bluetooth_cycling_cadence_key"
             android:title="@string/settings_sensor_cycling_cadence" />
-        <de.dennisguse.opentracks.settings.bluetooth.BluetoothLeCyclingPowerPreference
+        <com.reopentracks.settings.bluetooth.BluetoothLeCyclingPowerPreference
             android:defaultValue="@string/sensor_type_value_none"
             android:key="@string/settings_sensor_bluetooth_cycling_power_key"
             android:title="@string/sensor_state_power" />
-        <de.dennisguse.opentracks.settings.bluetooth.BluetoothLeCyclingSpeedPreference
+        <com.reopentracks.settings.bluetooth.BluetoothLeCyclingSpeedPreference
             android:defaultValue="@string/sensor_type_value_none"
             android:key="@string/settings_sensor_bluetooth_cycling_speed_key"
             android:title="@string/settings_sensor_cycling_distance_speed" />
@@ -57,7 +57,7 @@
     </PreferenceCategory>
 
     <PreferenceCategory android:title="@string/settings_running_sensor">
-        <de.dennisguse.opentracks.settings.bluetooth.BluetoothLeRunningSpeedAndCadencePreference
+        <com.reopentracks.settings.bluetooth.BluetoothLeRunningSpeedAndCadencePreference
             android:defaultValue="@string/sensor_type_value_none"
             android:key="@string/settings_sensor_bluetooth_running_speed_and_cadence_key"
             android:title="@string/settings_sensor_running_speed_and_cadence" />
