@@ -100,6 +100,8 @@ public class KMLTrackExporter implements TrackExporter {
     private final List<Float> accuracyHorizontal = new ArrayList<>();
     private final List<Float> accuracyVertical = new ArrayList<>();
 
+    private final List<Position> lineStringPositions = new ArrayList<>();
+
     public KMLTrackExporter(Context context, ContentProviderUtils contentProviderUtils, boolean exportPhotos) {
         this.context = context;
         this.exportPhotos = exportPhotos;
@@ -255,6 +257,12 @@ public class KMLTrackExporter implements TrackExporter {
         writeSimpleArrayStyle(EXTENDED_DATA_TYPE_POWER, context.getString(R.string.description_sensor_power));
         writeSimpleArrayStyle(EXTENDED_DATA_TYPE_CADENCE, context.getString(R.string.description_sensor_cadence));
         writeSimpleArrayStyle(EXTENDED_DATA_TYPE_HEARTRATE, context.getString(R.string.description_sensor_heart_rate));
+        writeSimpleArrayStyle(EXTENDED_DATA_TYPE_TRACKPOINT, "Trackpoint type");
+        writeSimpleArrayStyle(EXTENDED_DATA_TYPE_DISTANCE, "Distance (m)");
+        writeSimpleArrayStyle(EXTENDED_DATA_TYPE_ALTITUDE_GAIN, "Elevation gain (m)");
+        writeSimpleArrayStyle(EXTENDED_DATA_TYPE_ALTITUDE_LOSS, "Elevation loss (m)");
+        writeSimpleArrayStyle(EXTENDED_DATA_TYPE_ACCURACY_HORIZONTAL, "Horizontal accuracy (m)");
+        writeSimpleArrayStyle(EXTENDED_DATA_TYPE_ACCURACY_VERTICAL, "Vertical accuracy (m)");
 
         printWriter.println("</Schema>");
     }
@@ -306,10 +314,12 @@ public class KMLTrackExporter implements TrackExporter {
         printWriter.println("<MultiTrack>");
         printWriter.println("<altitudeMode>absolute</altitudeMode>");
         printWriter.println("<interpolate>1</interpolate>");
+        lineStringPositions.clear();
     }
 
     private void writeEndTrack() {
         printWriter.println("</MultiTrack>");
+        writeLineStringFallback();
         printWriter.println("</Placemark>");
     }
 
@@ -367,6 +377,23 @@ public class KMLTrackExporter implements TrackExporter {
         printWriter.println("</Track>");
     }
 
+    private void writeLineStringFallback() {
+        if (lineStringPositions.isEmpty()) {
+            return;
+        }
+        printWriter.println("<LineString>");
+        printWriter.println("<altitudeMode>absolute</altitudeMode>");
+        StringBuilder coordinates = new StringBuilder();
+        for (Position position : lineStringPositions) {
+            if (!coordinates.isEmpty()) {
+                coordinates.append(" ");
+            }
+            coordinates.append(getCoordinates(position, ","));
+        }
+        printWriter.println("<coordinates>" + coordinates + "</coordinates>");
+        printWriter.println("</LineString>");
+    }
+
     @VisibleForTesting
     void writeTrackPoint(ZoneOffset zoneOffset, TrackPoint trackPoint) {
         printWriter.println("<when>" + getTime(zoneOffset, trackPoint.getTime()) + "</when>");
@@ -375,6 +402,7 @@ public class KMLTrackExporter implements TrackExporter {
 
         if (trackPoint.hasLocation()) {
             printWriter.println("<coord>" + getCoordinates(trackPoint.getPosition(), " ") + "</coord>");
+            lineStringPositions.add(trackPoint.getPosition());
         } else {
             printWriter.println("<coord/>");
         }
