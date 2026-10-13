@@ -46,8 +46,8 @@ android {
 
     defaultConfig {
         applicationId 'com.reopentracks'
-        versionCode 6284
-        versionName "v4.22.0"
+        versionCode 6289
+        versionName "v5.0.0"
 
         buildConfigField "String", "VERSION_NAME_FULL", "\"${getVersionName()}\""
 

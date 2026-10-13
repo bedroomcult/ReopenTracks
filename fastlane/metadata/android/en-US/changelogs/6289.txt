@@ -1,0 +1,10 @@
+v5.0.0: ReopenTracks
+
+Changes:
+- Renamed OpenTracks to ReopenTracks (new app id com.reopentracks; installs side-by-side with legacy OpenTracks, no data migration)
+- KML/KMZ exports now include LineString geometry, so tracks render in OsmAnd, OpenLayers, SportsTracker and other KML 2.2 readers
+- KML Schema now declares all exported sensor fields (distance, elevation gain/loss, accuracies, trackpoint type)
+- README: GitHub Releases is now the only download source (F-Droid/Play Store badges removed)
+
+Bugfix:
+- Fixed KML/KMZ track invisible in third-party apps (geometry was KML 2.3 <Track>/<coord> only)
