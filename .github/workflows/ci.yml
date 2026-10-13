@@ -33,10 +33,9 @@ jobs:
           java-version: 17
       - name: Set up Gradle
         uses: gradle/actions/setup-gradle@v4
-      - name: Set up Android SDK
-        uses: android-actions/setup-android@v3
       - name: Install API 36 platform + build-tools
-        # No-op if the runner image already includes them (matches compileSdk = 36).
+        # ubuntu-latest ships the Android SDK preinstalled; ANDROID_HOME/ANDROID_SDK_ROOT are preset.
+        # Install is a no-op if the image already includes them (matches compileSdk = 36).
         run: sdkmanager "platforms;android-36" "build-tools;36.0.0"
       - name: Make gradlew executable
         run: chmod +x gradlew
@@ -66,9 +65,8 @@ jobs:
           java-version: 17
       - name: Set up Gradle
         uses: gradle/actions/setup-gradle@v4
-      - name: Set up Android SDK
-        uses: android-actions/setup-android@v3
       - name: Install API 36 platform + build-tools
+        # ubuntu-latest ships the Android SDK preinstalled; ANDROID_HOME/ANDROID_SDK_ROOT are preset.
         run: sdkmanager "platforms;android-36" "build-tools;36.0.0"
       - name: Make gradlew executable
         run: chmod +x gradlew
