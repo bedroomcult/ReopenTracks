@@ -385,7 +385,7 @@ public class KMLTrackExporter implements TrackExporter {
         printWriter.println("<altitudeMode>absolute</altitudeMode>");
         StringBuilder coordinates = new StringBuilder();
         for (Position position : lineStringPositions) {
-            if (coordinates.length() == 0) {
+            if (coordinates.length() > 0) {
                 coordinates.append(" ");
             }
             coordinates.append(getCoordinates(position, ","));

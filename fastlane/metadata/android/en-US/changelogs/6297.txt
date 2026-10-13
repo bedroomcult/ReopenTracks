@@ -1,0 +1,4 @@
+v5.0.1: ReopenTracks
+
+Bugfix:
+- Fixed KML/KMZ track not visible in Google Earth and other KML readers (introduced in v5.0.0; LineString coordinates were written without separators)
